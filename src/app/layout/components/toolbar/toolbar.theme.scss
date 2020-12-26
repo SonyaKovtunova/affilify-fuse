@@ -1,0 +1,11 @@
+@mixin toolbar-theme() {
+
+    $foreground: #000000;
+
+    toolbar {
+
+        .toolbar-separator {
+            background: $foreground;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+@mixin mail-confirm-theme() {
+
+    $background: #000000;
+    $foreground: #ffffff;
+
+    mail-confirm {
+
+        #mail-confirm {
+
+            #mail-confirm-form-wrapper {
+
+                #mail-confirm-form {
+                    background: $background;
+
+                    .subtitle {
+                        color: $foreground;
+                    }
+                }
+            }
+        }
+    }
+}

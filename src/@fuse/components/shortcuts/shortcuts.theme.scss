@@ -1,0 +1,11 @@
+@mixin fuse-shortcuts-theme() {
+
+    $background: #000000;
+
+    #fuse-shortcuts {
+
+        &.show-mobile-panel {
+            background-color: $background;
+        }
+    }
+}

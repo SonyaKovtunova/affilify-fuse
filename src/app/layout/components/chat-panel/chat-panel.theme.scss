@@ -1,0 +1,77 @@
+@mixin chat-panel-theme() {
+
+    $background: #000000;
+    $foreground: #ffffff;
+    $primary: #ffffff;
+    $teal: #41D4D9;
+
+    chat-panel {
+
+        #contacts-list {
+            background-color: $background;
+
+            .contacts-list-item {
+
+                &.active {
+                    background: $background;
+
+                    &:after {
+                        background-color: $teal;
+                    }
+                }
+
+                .unread-count {
+                    background-color: $teal;
+                    color: $teal;
+                }
+
+                .status-icon {
+                    border-color: $background;
+                }
+            }
+        }
+
+        #chat {
+
+            .messages {
+
+                .message-row {
+
+                    &.contact {
+
+                        .bubble {
+                            background-color: $primary;
+                            color: $primary;
+                        }
+                    }
+
+                    &.me {
+
+                        .bubble {
+                            color: rgba(0, 0, 0, 0.87);
+                            background-color: #E0E0E0;
+                        }
+                    }
+                }
+            }
+
+            .reply-form {
+
+                .message-text {
+                    background-color: $background;
+                    border-color: $foreground;
+
+                    .mat-form-field-wrapper {
+
+                        .mat-form-field-flex {
+
+                            .mat-form-field-infix {
+                                background-color: $background;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

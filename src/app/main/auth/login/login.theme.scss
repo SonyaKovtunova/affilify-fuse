@@ -1,0 +1,30 @@
+@mixin login-theme() {
+
+    $background: #000000;
+    $foreground: #ffffff;
+
+    login {
+
+        #login {
+
+            #login-form-wrapper {
+
+                #login-form {
+                    background: $background;
+
+                    .separator {
+                        color: $foreground;
+
+                        .text {
+
+                            &:before,
+                            &:after {
+                                border-top-color: $foreground;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

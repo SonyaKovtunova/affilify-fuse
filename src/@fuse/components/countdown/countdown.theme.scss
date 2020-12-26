@@ -1,0 +1,17 @@
+@mixin fuse-countdown-theme() {
+
+    $foreground: #ffffff;
+
+    fuse-countdown {
+
+        .fuse-countdown {
+
+            .time {
+
+                .title {
+                    color: $foreground;
+                }
+            }
+        }
+    }
+}

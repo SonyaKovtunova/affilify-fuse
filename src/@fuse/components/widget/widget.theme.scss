@@ -1,0 +1,14 @@
+@mixin fuse-widget-theme() {
+
+    $background: #1C2027;
+    $foreground: #ffffff;
+
+    fuse-widget {
+
+        > .fuse-widget-front,
+        > .fuse-widget-back {
+            background: $background;
+            border-color: $foreground;
+        }
+    }
+}

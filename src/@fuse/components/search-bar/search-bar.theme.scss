@@ -1,0 +1,11 @@
+@mixin fuse-search-bar-theme() {
+
+    $background: #000000;
+
+    .fuse-search-bar {
+
+        &.expanded {
+            background-color: $background;
+        }
+    }
+}
