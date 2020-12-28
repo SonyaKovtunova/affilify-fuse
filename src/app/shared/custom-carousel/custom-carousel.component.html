@@ -1,0 +1,112 @@
+<section class="carousel-data">
+    <!-- [class.invisible]="isNavHidden" -->
+    <button
+      *ngIf="isNavAvailable"
+      (click)="prev()"
+      class="button button-prev {{navButtonClass}}"
+      [style.width]="offset"
+    >
+      <img src="assets/icons/back.svg" alt="">
+    </button>
+  
+    <div #wrapper
+      class="carousel-wrapper"
+      [style.marginLeft]="offset"
+      [style.marginRight]="offset"
+    >
+  
+      <div *ngIf="navigationArray.length > 1" class="navigation">
+        <span
+          *ngFor="let slide of navigationArray; index as idx"
+          class="navigation-tile"
+          [class.active]="slide"
+        ></span>
+      </div>
+  
+      <div class="slider carousel-inner hover-enable" 
+        #carousel 
+      >
+        <div
+          *ngFor="let item of renderItems; index as idx"
+          class="app-carousel-affilify-item transform-animation"
+          [class.active-carousel-tile]="idx === hoveredIdx"
+          [style.transform]="hoveredIdx != null ? item.transform : ''"
+          (mouseenter)="mouseenter($event, idx)"
+          (mouseleave)="mouseleave($event, idx)"
+          [class.active-tile]="item.isActive"
+          [class.next-tile]="item.isNext"
+          [class.prev-tile]="item.isPrev"
+          [class.before-tile]="item.isBefore"
+          [ngSwitch]="type"
+        >
+          <app-common-tile 
+            *ngSwitchCase="type === 'common' || type === 'mycourses' ? type : ''"
+            [course]="item"
+            [isActive]="idx === hoveredIdx"
+            [isDetailed]="item.id === detailedCourseId" 
+            [detailedCourseId]="detailedCourseId"
+            (detailsClick)="onTileDetailsClick($event)" 
+            [showProgress]="type === 'mycourses'"
+            (currentTimeInactive)="onCurrentTimeInactive($event)"
+          >
+          </app-common-tile>
+          <app-originals-tile 
+            *ngSwitchCase="'originals'"
+            [course]="item"
+            [isActive]="idx === hoveredIdx"
+            [isDetailed]="item.id === detailedCourseId" 
+            [detailedCourseId]="detailedCourseId"
+            (detailsClick)="onTileDetailsClick($event)" 
+            (currentTimeInactive)="onCurrentTimeInactive($event)"
+          >
+          </app-originals-tile>
+          <app-top-tile 
+            *ngSwitchCase="'top'"
+            [course]="item"
+            [isActive]="idx === hoveredIdx"
+            [isDetailed]="item.id === detailedCourseId" 
+            [detailedCourseId]="detailedCourseId"
+            (detailsClick)="onTileDetailsClick($event)"
+            (currentTimeInactive)="onCurrentTimeInactive($event)"
+          >
+          </app-top-tile>
+          
+          <app-dashboard-tile
+          *ngSwitchCase="'dashboard'"
+          [course]="item"
+          [isActive]="idx === hoveredIdx"
+          [isDetailed]="item.id === detailedCourseId" 
+          [detailedCourseId]="detailedCourseId"
+          (detailsClick)="onTileDetailsClick($event)" 
+          [showProgress]="showProgress == 'true'"
+          (currentTimeInactive)="onCurrentTimeInactive($event)"
+          >
+          </app-dashboard-tile>
+  
+          <app-expert-dashboard-tile
+          *ngSwitchCase="type === 'published' || type === 'underReview'  || type === 'draft' || type === 'coCourses' ? type : ''"
+          [course]="item"
+          [isActive]="idx === hoveredIdx"
+          [isDetailed]="item.id === detailedCourseId" 
+          [detailedCourseId]="detailedCourseId"
+          (detailsClick)="onTileDetailsClick($event)"
+          [btnMakeFeatured]="type === 'published'"
+          [btnPublish]="type === 'draft'"
+          (currentTimeInactive)="onCurrentTimeInactive($event)"
+          >
+          </app-expert-dashboard-tile>
+  
+        </div>
+      </div>
+    </div>
+  
+    <button
+      *ngIf="isNavAvailable"
+      (click)="next()"
+      class="button button-next {{navButtonClass}}"
+      [style.width]="offset"
+    >
+      <img src="assets/icons/next.svg" alt="">
+    </button>
+  
+  </section>

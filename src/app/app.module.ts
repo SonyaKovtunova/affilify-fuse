@@ -16,23 +16,22 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const appRoutes: Routes = [
-  {
+  /*{
     path: '',
-    loadChildren: () => import('./main/sample/sample.module').then(m => m.SampleModule)
-  },
+    loadChildren: () => import('./main/home/home.module').then(m => m.HomeModule)
+  },*/
   {
     path: 'auth',
     loadChildren: () => import('./main/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path      : '**',
-    redirectTo: ''
+    redirectTo: 'auth'
   }
 ];
 
@@ -64,7 +63,6 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule,
         CoreModule
     ],
     bootstrap   : [

@@ -1,0 +1,4 @@
+<video class="video-simple" [autoplay]="isAutoplay" [(muted)]="isMuted" (play)="onVideoPlay()" (playing)="onVideoPlay()"
+  (pause)="onVideoPause()" (canplay)="onVideoCanPlay()" (loadedmetadata)="onVideoLoadedMetaData()"
+  [currentTime]="currentTime" [controls]="controls" #videoPlayer [src]="link">
+</video>

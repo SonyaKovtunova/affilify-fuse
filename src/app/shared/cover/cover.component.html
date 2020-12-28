@@ -1,0 +1,3 @@
+<ng-container *ngIf="guid || src">
+    <img [src]="getUrl()" class="cover-simple" [ngClass]="{ 'contain': position === 'contain', 'max-only-limit': onlyLimits }" alt="{{text}}">
+</ng-container>

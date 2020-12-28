@@ -1,0 +1,38 @@
+app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+$white: #fff;
+$black: #000;
+
+.page {
+    background-color: $black;
+    color: $white;
+    overflow-x: hidden;
+
+    .page-content {
+        min-height: calc(100vh - 25vw - 4vw); // 25vw - footer, 4vw - header
+    }
+}
+
+
+/*Tablet*/
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .page {
+        .page-content {
+            min-height: calc(100vh - 90px - 80vh); // 90px - header, 80vh - footer
+        }
+    }
+}
+
+/*Mobile*/
+@media (max-width: 767px) {
+    .page {
+        .page-content {
+            min-height: 20vw; //  calc(100vh - 28vh - 80vh); // 28vw - header, 80vh - footer
+        }
+    }
+}

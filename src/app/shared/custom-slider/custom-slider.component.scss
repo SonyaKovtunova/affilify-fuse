@@ -1,0 +1,81 @@
+/* slide section*/
+.slider-section  {
+    margin: 3vw 0; // Affilify
+    position: relative;
+    z-index: 1;
+
+    &.mobile {
+        // margin: 0;
+    }
+
+    &:hover {
+        z-index: 2
+    }
+
+    .title {
+        font-size: 1.666666667vw; // 32px
+        line-height: 2.239583333vw; // 43px
+        font-weight: 600;
+        margin-left: 3vw; // 123
+    }
+
+    .courses {
+        padding-top: 1.71875vw; // 33px
+    }
+
+    .detailed {
+        margin-right: 3vw; // Affilify - active part of slider
+        margin-left: 3vw; // Affilify - active part of slider
+        margin-top: 0.75vw;
+        position: relative;
+        overflow: hidden;
+        max-height: 0vw;
+        transition-duration: 0.5s;
+
+        .section-close {
+            position: absolute;
+            top: 1.5625vw; // 30px
+            right: 1.5625vw; // 30px
+            width: 1.041666667vw; // 20px
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        &-active {
+            max-height: 90vw;
+        }
+    }
+}
+
+// /*Desktop*/
+// @media (min-width: 1370px) {
+
+// }
+
+/*Laptop*/
+@media (min-width: 1025px) and (max-width: 1369px) {
+
+}
+
+/*Tablet*/
+@media (min-width: 768px) and (max-width: 1024px) {
+    .slider-section  {
+        .title {
+            font-size: 14px;
+        }
+    }
+}
+
+/*Mobile*/
+@media (max-width: 767px) {
+    .slider-section  {
+        margin-bottom: 25px;
+
+        .title {
+            font-size: 16px;
+            margin-bottom: 20px;
+            margin-left: 4vw;
+
+        }
+    }
+}

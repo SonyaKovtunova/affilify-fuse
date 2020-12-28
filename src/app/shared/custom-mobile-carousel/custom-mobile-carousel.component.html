@@ -1,0 +1,29 @@
+<div class="carousel-mobile">
+    <div class="single-row">
+        <div class="slider hidden-scroll">
+            <div *ngFor="let course of data; index as idx"  class="app-carousel-affilify-item">
+                <div class="tile" [class]="type" (click)="onTileClick(course.id)">
+                    <div class="overlay" [ngSwitch]="type">
+                        <ng-container *ngSwitchCase="type === 'common' || type === 'mycourses' ? type : ''">
+                            <app-cover-simple [guid]="course?.cover" [altText]="course.title"></app-cover-simple>
+                        </ng-container>
+            
+                        <ng-container *ngSwitchCase="'originals'">
+                            <app-cover-simple [guid]="course?.verticalCover" [altText]="course.title"></app-cover-simple>
+                            <app-cover-simple imageSrc="assets/img/logo-mini.png" class="originals-logo" [altText]="course.title"></app-cover-simple>
+                        </ng-container>
+        
+                        <ng-container *ngSwitchCase="'top'">
+                            <div class="number-cover overlay">
+                                <img src="/assets/icons/rank/{{course.orderNumber}}.svg" [class.no-left-offset]="course.orderNumber > 9" alt=""> 
+                            </div>
+                            <div class="cover overlay">
+                                <app-cover-simple [guid]="course?.verticalCover" [altText]="course.title"></app-cover-simple>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

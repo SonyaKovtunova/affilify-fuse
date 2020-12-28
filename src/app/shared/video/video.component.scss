@@ -1,0 +1,15 @@
+$black: #000;
+
+.video-simple {
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+:host.video-contains {
+    .video-simple {
+        object-fit: contain;
+        background-color: $black;
+    }
+}

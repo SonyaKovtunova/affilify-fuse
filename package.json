@@ -57,6 +57,7 @@
         "prismjs": "1.22.0",
         "rxjs": "6.6.3",
         "tslib": "2.0.3",
+        "tus-js-client": "2.2.0",
         "web-animations-js": "2.3.2",
         "zone.js": "0.10.3"
     },

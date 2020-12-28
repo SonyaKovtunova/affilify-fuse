@@ -1,0 +1,35 @@
+<section class="slider-section" [class.mobile]="isMobile">
+    <div class="title">{{title}}</div>
+  
+    <div class="courses" *ngIf="!(isMobileSimple && isMobile)">
+      <app-carousel-affilify 
+        [(hoveredIdx)]="hoverIndex" 
+        [data]="data"
+        [detailedCourseId]="detailedCourseId"
+        (detailsClick)="onTileDetailsClick($event)"
+        [type]="type"
+        [scaleValue]="scaleValue"
+        [showProgress]="showProgress"
+        [fixedTileCount]="fixedTileCount"
+        [isFullScreen]="isFullScreen"
+        navButtonClass="black-gradient"
+      >
+      </app-carousel-affilify>
+    </div>
+  
+    <div 
+      class="detailed"
+      [class.detailed-active]="detailedShown"
+    >
+      <app-course-info *ngIf="detailedCourseId && checkIsCourse(detailedCourseId)" class="page-course" [id]="detailedCourseId"></app-course-info>
+      <app-service-info *ngIf="detailedCourseId && checkIsService(detailedCourseId)" class="page-course" [id]="detailedCourseId"></app-service-info>
+      <div *ngIf="detailedCourseId && (checkIsCourse(detailedCourseId) || checkIsService(detailedCourseId))" class="section-close" (click)="onDetailsClose()">
+        <img src="assets/icons/close.svg">
+      </div>
+    </div>
+  
+    <div class="mobile-courses-slider" *ngIf="isMobile && isMobileSimple">
+      <app-carousel-affilify-mobile [data]="data" [type]="type"></app-carousel-affilify-mobile>
+    </div>
+  
+  </section>

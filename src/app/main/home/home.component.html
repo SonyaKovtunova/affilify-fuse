@@ -1,0 +1,35 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+    <!--<app-main></app-main>  -->
+      
+    <app-slider-section-affilify *ngIf="userCourses?.length && user.email" title="{{ 'HOMEPAGE.MYCOURSES' | translate }}" [data]="userCourses"
+        (detailsClick)="onTileDetailsClick($event)" type="mycourses" [isMobileSimple]="true">
+    </app-slider-section-affilify> 
+      
+    <app-slider-section-affilify *ngIf="wishCourses?.length && user.email" title="{{ 'HOMEPAGE.MYWISHLIST' | translate }}" [data]="wishCourses"
+        (detailsClick)="onTileDetailsClick($event)" type="common" [isMobileSimple]="true">
+    </app-slider-section-affilify> 
+      
+    <app-slider-section-affilify *ngIf="popular?.length" title="{{ 'HOMEPAGE.POPULAR' | translate }}" [data]="popular" (detailsClick)="onTileDetailsClick($event)"
+        type="common" [isMobileSimple]="true">
+    </app-slider-section-affilify> 
+      
+    <app-slider-section-affilify *ngIf="trending?.length" title="{{ 'HOMEPAGE.TRENDING' | translate }}" [data]="trending" (detailsClick)="onTileDetailsClick($event)"
+        type="common" [isMobileSimple]="true">
+    </app-slider-section-affilify> 
+          
+    <!--<app-home-single-section *ngIf="single" [data]="single"></app-home-single-section> -->
+      
+    <app-slider-section-affilify *ngIf="originals?.length" title="{{ 'HOMEPAGE.ORIGINALS' | translate }}" [data]="originals" (detailsClick)="onTileDetailsClick($event)"
+        type="originals" [isMobileSimple]="true">
+    </app-slider-section-affilify>
+      
+    <app-slider-section-affilify *ngIf="top?.length" title="{{ 'HOMEPAGE.TOPTEN' | translate }}" [data]="top" (detailsClick)="onTileDetailsClick($event)" 
+        type="top" [isMobileSimple]="true">
+    </app-slider-section-affilify>
+      
+    <ng-container *ngFor="let category of categories">
+        <app-slider-section-affilify *ngIf="category?.items?.length" [title]="category.name"
+            [data]="category.items" (detailsClick)="onTileDetailsClick($event)" type="common" [isMobileSimple]="true">
+        </app-slider-section-affilify>
+    </ng-container>
+</div>

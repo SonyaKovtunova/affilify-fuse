@@ -1,0 +1,227 @@
+$white: #fff;
+$black: #000;
+$grey-gradient: #1C2027;
+
+@mixin background-gradient ($rotate, $colorFrom, $colorTo) {
+    background: transparent linear-gradient($rotate, $colorFrom 0%, $colorTo 100%) 0% 0% no-repeat padding-box;
+}
+
+// buttons 
+$teal-dark: #2FAFB4; // button
+%button {
+    display: inline-block;
+    font: 400 0.520833333vw Open Sans; // 1em
+    letter-spacing: 1.1px;
+    text-align: center;
+    text-transform: uppercase;
+    color: $white;
+    background-color: transparent;
+    border: 1px solid $teal-dark;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0.9375vw; // 18px;
+    margin-right: 0.520833333vw; // 10px;
+    cursor: pointer;
+}
+.btn {
+    @extend %button;
+}
+
+
+.navigation {
+    display: flex;
+    margin: 5px;
+    margin: -24px 0 12px 0;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    top: 0;
+    right: 0.15625vw; // 3px
+
+    &-tile {
+        display: inline-block;
+        width: 12px;
+        height: 2px;
+        background-color: #4d4d4d;
+        margin-left: 1px;
+
+        &.active {
+            background-color: #aaa;
+        }
+    }
+}
+
+.carousel-data {
+    position: relative;
+
+    .button {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        border-width: 0;
+        border-radius: 0;
+        padding: 0;
+        transition: 0.15s all;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+
+        &.invisible {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        img {
+            height: 1.770833333vw; // 34
+            display: block;
+        }
+
+        &-prev {
+            left: 0;
+
+            &.grey-gradient {
+                @include background-gradient(-90deg, transparent, $grey-gradient);
+            }
+
+            &.black-gradient {
+                @include background-gradient(-90deg, transparent, $black);
+            }
+            
+        }
+        &-next {
+            right: 0;
+
+            &.grey-gradient {
+                @include background-gradient(90deg, transparent, $grey-gradient);
+            }
+            &.black-gradient {
+                @include background-gradient(90deg, transparent, $black);
+            }
+
+           
+        }
+    }
+
+    .carousel-wrapper {
+        overflow-y: visible;
+        position: relative;
+
+        
+    }
+}
+.slider {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    white-space: nowrap;
+
+    .app-carousel-affilify-item {
+        position: relative;
+        display: inline-block;
+        width: 16.6666667%;
+    }
+    
+    &.hover-enable {
+        .app-carousel-affilify-item {
+            &.active-carousel-tile {
+                z-index: 10;
+            }
+        }
+    }
+
+}
+
+.review-item {
+    +.review-item {
+    padding-left: 2.1875vw;
+    }
+}
+
+.carousel-inner {
+    transition-duration: .15s;
+}
+
+
+.transform-animation {
+    transition-duration: 0.5s;
+    transition-property: transform;
+}
+
+// /*Desktop*/
+// @media (min-width: 1370px) {
+
+// }
+
+// /*Laptop*/
+// @media (min-width: 1025px) and (max-width: 1369px) {
+
+// }
+
+// /*Tablet*/
+// @media (min-width: 768px) and (max-width: 1024px) {
+
+// }
+
+// /*Mobile*/
+// @media (max-width: 767px) {
+
+// }
+
+@media (max-width: 499px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 50%;
+        }
+    }
+        
+}
+
+@media (min-width: 500px) and (max-width: 799px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 33.3%;
+        }
+    }
+        
+}
+
+@media (min-width: 800px) and (max-width: 1099px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 25%;
+        }
+    }
+        
+}
+
+@media (min-width: 1100px) and (max-width: 1399px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 20%;
+        }
+    }
+        
+}
+
+@media (min-width: 1400px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 16.6666667%;
+        }
+    }
+        
+}
+
+
+

@@ -1,0 +1,98 @@
+<section class="single-section" [class.active]="isVideoPlayed">
+    <app-cover-simple
+      [guid]="data.cover"
+      class="poster"
+      [altText]="data.title">
+    </app-cover-simple>
+    <div class="shade"></div>
+  
+    <div class="content">
+  
+        <div class="content-left">
+          <div class="video-container">
+            <app-cover-simple
+              [guid]="data.cover"
+              class="poster"
+              [altText]="data.title">
+            </app-cover-simple>
+  
+            <app-video-simple
+              *ngIf="data.videoId"
+              [videoId]="data.videoId"
+              [isMuted]="isMuted"
+              [isAutoplay]="false"
+              class="video"
+              [(videoCanPlay)]="isVideoCanPlay"
+              (videoPlay)="onSimpleVideoPlay($event)"
+              [(videoLoadedMetadata)]="isVideoLoadedMetadata"
+            ></app-video-simple>
+  
+            <div class="video-controls" *ngIf="isVideoLoadedMetadata">
+              <button type="button" (click)="toogleMute()">
+                <span *ngIf="isMuted" class="material-icons icon">volume_off</span>
+                <span *ngIf="!isMuted" class="material-icons icon">volume_up</span>
+              </button>
+              <button type="button" (click)="replay()">
+                <span class="material-icons icon icon-replay">replay</span>
+              </button>
+              <button *ngIf="isVideoPlayed" type="button" (click)="pause()">
+                <span class="material-icons icon">pause</span>
+              </button>
+              <button *ngIf="!isVideoPlayed" type="button" (click)="play()">
+                <span class="material-icons icon">play_arrow</span>
+              </button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="content-right">
+          <div class="info">
+            <!-- <div class="logo">
+              <img src="assets/logo.webp" alt="">
+            </div> -->
+            <div class="logo">
+              <app-cover-simple *ngIf="data?.logo" [guid]="data.logo" class="hero-logo" imagePosition="contain" [useMaxOnlyLimits]="true"></app-cover-simple>
+            </div>
+            <div class="title">
+              {{data?.title}}
+            </div>
+            <div class="description">
+              {{data?.description}}
+            </div>
+            <div class="price">
+              <span class="full">{{data?.fullPrice | myCurrency}}</span>
+              <span *ngIf="data?.price > 0" class="discount">{{data?.price | myCurrency}}</span>
+              <span *ngIf="data?.price == 0" class="discount">{{'COMMON.FREE' | translate}}</span>
+  
+            </div>
+            <div class="actions">
+              <button *ngIf="!data.isUserCourse"  class="aff-button" type="button"
+               [AddToCart]="data"
+              [productType]="data.isCourseTrial ? productTypes.TrialCourse : productTypes.Course">
+                <app-buy-button-text [product]="{id: data.id, type: data.isCourseTrial ? productTypes.TrialCourse : productTypes.Course}"></app-buy-button-text>
+              </button>
+              <a *ngIf="data.isUserCourse && !data.locked" class="aff-button" (click)="navigateToLessonPage(data.id, data.title, data.description, data.cover)">{{ 'COMMON.BUTTON.STARTCOURSE' | translate }}</a>
+              <a *ngIf="data.isUserCourse && data.locked" ><button class="button" type="button"> {{ 'COMMON.BUTTON.LOCKED' | translate }}</button></a>
+  
+              <button class="aff-button aff-button-outline" type="button" (click)="onMoreInfoClick()">{{ 'COMMON.BUTTON.MOREINFO' | translate }}</button>
+  
+              <button
+                class="aff-button aff-button-outline aff-button-icon"
+                [class.aff-button-no-hover]="data.isUserWishlist"
+                type="button"
+                *Wishlist="data">
+                <span
+                  class="aff-ico"
+                  [class.aff-ico-wishlist-fill]="data.isUserWishlist"
+                  [class.text-aff-accent]="data.isUserWishlist"
+                  [class.aff-ico-wishlist]="!data.isUserWishlist">
+                </span>
+              </button>
+  
+            </div>
+          </div>
+        </div>
+  
+    </div>
+  </section>
+  

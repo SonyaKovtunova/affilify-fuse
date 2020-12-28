@@ -1,0 +1,112 @@
+<div class="common-tile" [ngClass]="{ 'active-item': isActive, 'detailed-item': isDetailed, 'detailed-mode' : isDetailedMode }" (mouseenter)="onMouseMove($event)">
+  <div class="tile-content">
+    <div class="static">
+      <div class="overlay">
+        <app-cover class="hero-poster" [guid]="course?.cover" [text]="course.title"></app-cover>
+      </div>
+
+      <div class="tile-progress" *ngIf="showProgress">
+        <mat-progress-bar class="tile-progress-mat" mode="determinate" [value]="course.progress"></mat-progress-bar>
+      </div>
+
+      <div class="overlay chevrone-overlay" >
+        <div class="details-button" [ngClass]="{ 'active-item': isActive }" (click)="onShowDetailsClick()">
+          <img src="assets/icons/chevron-down.svg"  alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="selected-border">
+      <span class="arrow-down"></span>
+    </div>
+
+    <div class="active" [ngClass]="{ 'animation-tile': this._isActive && this._isScale }">
+      <div class="overlay">
+        <app-cover *ngIf="course.cover" [guid]="course.cover" class="cover" [text]="course.title"></app-cover>
+        <app-video
+          *ngIf="course?.videoId && isActive && checkIsCourse(course.type)"
+          [@fadeOut]
+          [videoId]="course.videoId"
+          [currentTime]="course.currentTime || 0"
+          [isMuted]="isMuted"
+          [isAutoplay]="false"
+          class="media-video simple-overlay" [ngClass]="{'playing': _isVideoPlaying}"
+          (videoReadyToPlay)="onVideoReadyToPlay($event)"
+          (videoPlay)="onVideoPlay($event)">
+        </app-video>
+
+        <div class="tile-overlay">
+          <div class="animation-wr" [ngClass]="{ 'bg-fade': course?.videoId || !checkIsCourse(course.type), 
+            'bg-black': !course?.videoId && checkIsCourse(course.type), 'hide-overlay': controlsAnimationState === 'off' }">
+            <div class="tile-actions">
+              <div [hidden]="!isVideoCanPlay || checkIsWebinar(course.type)" class="action action-mute" (click)="toggleMute()">
+                <span class="material-icons icon">{{isMuted ? 'volume_off' : 'volume_up'}}</span>
+              </div>
+
+              <div [hidden]="!isVideoCanPlay || checkIsWebinar(course.type)" class="action action-mute" (click)="replayVideo()">
+                <span class="material-icons icon icon-replay">replay</span>
+              </div>
+
+              <div class="action action-wishlist" type="button" *Wishlist="course">
+                <span class="material-icons icon ">{{course.isUserWishlist ? 'favorite' : 'favorite_border'}}</span>
+              </div>
+            </div>
+            <span *ngIf="course?.tag" class="tag {{getColorClassByName(course?.tag)}}">{{course?.tag}}</span>
+            <div class="course-title" [ngClass]="{ 'smaller-text': course?.title.length > 35 }">{{course?.title}}
+              <span class="badge badge-dark float-right type-badge">{{getItemType(course?.type)}}</span>
+            </div>
+            <div class="course-description" [ngClass]="{ 'smaller-text': isDescriptionSmallerText }">{{descriptionToShow}}</div>
+
+            <div class="course-category" *ngIf="course?.categories">
+              <a href="javascript://" *ngFor="let category of course.categories">{{category}}</a>
+            </div>
+            <div class="course-category" *ngIf="checkIsWebinar(course.type)">
+              <a href="javascript://">{{course.categoryName}}</a>
+            </div>
+            <div class="course-description" *ngIf="checkIsWebinar(course.type)">
+              <div>Hosted by {{course.authorName}}</div>
+              <div *ngFor="let schedule of course.schedules">
+                <span *ngIf="schedule.scheduleType === 0">
+                  <strong>{{ schedule.date | date: 'dd MMM, yyyy'}},</strong> {{ getTimeStr(schedule) }}
+                </span>
+                <span *ngIf="schedule.scheduleType === 1">
+                  <strong>Every {{scheduleDays[schedule.dayOfWeek]}},</strong>
+                  {{ getTimeStr(schedule) }}
+                </span>
+              </div>
+            </div>
+            <div class="course-prices" *ngIf="!checkIsWebinar(course.type)">
+              <span class="full-price">{{course?.fullPrice | myCurrency}}</span>
+              <span *ngIf="course?.price > 0">{{course?.price | myCurrency}}</span>
+              <span *ngIf="course?.price == 0">{{'COMMON.FREE' | translate}}</span>
+            </div>
+
+            <div class="details-button" [ngClass]="{ 'tile-active': isActive }" (click)="onShowDetailsClick()" *ngIf="!checkIsWebinar(course.type)">
+              <img src="assets/icons/chevron-down.svg"  alt="">
+            </div>
+          </div>
+        </div>
+
+        <div class="button-wr">
+            <a class="button" *ngIf="checkIsWebinar(course.type)" target="_blank" href="{{course.link}}">
+                Registration
+            </a>
+            <button class="button"
+                    type="button"
+                    *ngIf="!(course.isUserItem || course.isUserCourse) && !checkIsWebinar(course.type)"
+                    [AddToCart]="course"
+                    [productType]="getProductType(course.type)">
+                <app-buy-button-text [product]="{id: course.id, type: getProductType(course?.type)}"></app-buy-button-text>
+            </button>
+
+              <a *ngIf="(course.isUserItem || course.isUserCourse) && (!course.locked) && (course.type != undefined ? checkIsCourse(course.type) : true)" (click)="navigateToLessonPage(course.id, course.title, course.description, course.cover)">
+                <button class="button" type="button" > {{ 'COMMON.BUTTON.STARTCOURSE' | translate }}</button>
+              </a>
+              <a *ngIf="(course.isUserItem || course.isUserCourse) && (course.locked) && (course.type != undefined ? checkIsCourse(course.type) : true)" >
+                <button class="button" type="button" > {{ 'COMMON.BUTTON.LOCKED' | translate }}</button>
+              </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

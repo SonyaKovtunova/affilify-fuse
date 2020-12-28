@@ -1,0 +1,377 @@
+$white: #fff;
+$black: #000;
+$teal: #41D4D9;
+$teal-dark: #2FAFB4; // button
+$negative: #DB5363;
+$positive: #81C69C;
+
+.bg-black { background-color: $black; }
+.bg-positive { background-color: $positive; }
+.bg-negative { background-color: $negative; }
+.bg-teal     { background-color: $teal; }
+.bg-fade     { background-color: rgba(1, 1, 1, 0.31); }
+
+%animation {
+    transition: all ease 0.15s;
+}
+
+%overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+%cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+%textShadow {
+    text-shadow: $black 0px 0px 3px;
+}
+
+%tileTransition {
+    transition-duration: 0.5s;
+}
+%fadeHidden {
+    visibility: hidden;
+    opacity: 0;
+}
+%fadeVisible {
+    visibility: visible;
+    opacity: 1;
+}
+
+// buttons 
+%button {
+    display: inline-block;
+    font: 400 0.520833333vw Open Sans; // 1em
+    letter-spacing: 1.1px;
+    text-align: center;
+    text-transform: uppercase;
+    color: $white;
+    background-color: transparent;
+    border: 1px solid $teal-dark;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0.9375vw; // 18px;
+    margin-right: 0.520833333vw; // 10px;
+    cursor: pointer;
+    @extend %animation;
+}
+
+.simple-overlay {
+    @extend %overlay;
+}
+
+.published-tile {
+    padding: 0 0.15625vw; // 3px - offset between slides
+    .tile-content {
+        position: relative;
+        background: #1C2027;
+    }
+
+    .static {
+        width: 100%;
+        position: relative;
+        padding: 28.125% 0;
+
+        .overlay {
+            @extend %overlay;
+
+            .cover {
+                @extend %cover;
+            }
+        }
+
+        .tile-progress {
+            position: absolute;
+            left: 15%;
+            right: 15%;
+            bottom: -10%;
+            @extend %fadeVisible;
+            @extend %tileTransition;
+            // transition-duration: 0.5s;
+
+            .tile-progress-mat {
+                border-radius: 2px;
+            }
+        }
+
+        .details-button {
+            @extend %fadeHidden;
+            @extend %tileTransition;
+        }
+    }
+
+    .active {
+        @extend %overlay;
+        @extend %fadeHidden;
+        @extend %tileTransition;
+        opacity: 1;
+        // transition-duration: 0.5s;
+
+        &.animation-tile {
+            @extend %fadeVisible;
+            transition-duration: 0s;
+        }
+
+        .overlay {
+            @extend %overlay;
+            position: absolute;
+            width: 195%;
+            height: 195%;
+            top: -47.5%;
+            left: -47.5%;
+            transform: scale(0.513);
+            overflow: hidden;
+            @extend %tileTransition;
+
+            .cover {
+                @extend %cover;
+                display: block;
+            }
+            // .media-video {
+            //     @extend %overlay;
+            //     display: block;
+            //     overflow: hidden;
+            //     // @extend %fadeHidden;
+            //     // transition-duration: 1s; // todo
+            //     // .video-container {
+            //     //     @extend %tileTransition;
+            //     //     @extend %fadeInvisible !optional;
+            //     //     @extend %tileTransition;
+            //     //     &.playing {
+            //     //         @extend %fadeVisible;
+            //     //     }
+            //     // }
+            // }
+            .tile-overlay {
+                @extend %overlay;
+                @extend %fadeHidden;
+                @extend %tileTransition;
+
+                .animation-wr {
+                    padding: 1.5625vw; // 30px
+                    // background: rgba(1, 1, 1, 0.31);
+                    @extend %overlay;
+                    transition-duration: 0.3s;
+
+                    &.hide-overlay {
+                        @extend %fadeHidden;
+                        transition-duration: 4s;
+                        transition-timing-function: linear;
+                    }
+                }
+
+                .tag {
+                    top: 1.25vw; // 24px
+                    right: 3.59375vw; // 69px
+                }
+
+                .course-title {
+                    font: 600 1.979166667vw/2.03125vw Open Sans;
+                    width: 70%;
+                    position: relative;
+                    margin-bottom: 0.9375vw;
+                    @extend %textShadow;
+                    white-space: initial;
+                }
+
+                .course-description {
+                    font: 600 0.9375vw/1.25vw Open Sans;
+                    width: 70%;
+                    height: 27%;
+                    overflow: hidden;
+                    white-space: initial;
+                    margin-bottom: 0.9375vw;
+                    @extend %textShadow;
+                }
+
+                .course-category {
+                    font: 600 0.9375vw/1.25vw Open Sans;
+                    letter-spacing: 1.4px;
+                    text-transform: uppercase;
+
+                    a {
+                        color: $teal;
+                        margin-right: 0.520833333vw; // 10px
+                        @extend %textShadow;
+                    }
+                }
+
+                .course-prices {
+                    font: 700 2.604166667vw/2vw Open Sans; // 40px/33px
+                    position: absolute;
+                    bottom: 1vw; //
+                    @extend %textShadow;
+
+                    span {
+                        display: block;
+                        margin-left: 0;
+                        color: $teal-dark;
+                    }
+
+                    .full-price {
+                        font-size: 1.510416667vw;
+                        color: $negative;
+                        text-decoration: line-through;
+                    }
+                }
+
+                .tile-actions {
+                    position: absolute;
+                    right: 1.041666667vw; // 20px
+                    top: 0.520833333vw; // 10px
+                    display: flex;
+                    flex-direction: column;
+                    cursor: pointer;
+
+                    .action {
+                        box-sizing: border-box;
+                        width: 1.875vw; // 36px
+                        height: 1.875vw; // 36px
+                        border: 1px solid $white;
+                        border-radius: 0.9375vw; // 18px
+                        padding: 0.3125vw; // 6px
+                        margin-bottom: 0.3125vw; // 6px
+                        display: flex;
+                        justify-content: center;
+                        transition-duration: 0.3s;
+
+                        .icon {
+                            font-size: 1.25vw;
+                            
+                            &-replay {
+                                transform: scaleX(-1);
+                            }
+                        }
+
+                        &:hover {
+                            color: $teal;
+                            border-color: $teal;
+                            transition-duration: 0.3s;
+                        }
+                    }
+                }
+            }
+
+            .button-wr {
+                position: absolute;
+                right: 1vw;
+                bottom: 3vw; // 10px
+                z-index: 4;
+                @extend %fadeHidden;
+                @extend %tileTransition;
+
+                .button {
+                    @extend %button;
+                    background-color: $teal-dark;
+                    font-size: 1vw;
+                    padding: 0.520833333vw 1.5625vw; // 10px 30px
+                }
+            }
+        }
+    }
+    // chevrone - button
+    .details-button {
+        position: absolute;
+        bottom: 6%;
+        right: 44%;
+        left: 44%;
+        opacity: 0;
+        cursor: pointer;
+        transition: opacity ease 150ms;
+        filter: drop-shadow(0 0 2px $black);
+        z-index: 2;
+
+        &.tile-active {
+            opacity: 1
+        }
+    }
+
+    &.active-item {
+
+        .active {
+            @extend %fadeVisible;
+
+            .overlay {
+                visibility: visible;
+                width: 195%;
+                height: 195%;
+                top: -47.5%;
+                left: -47.5%;
+                z-index: 2;
+                transform: scale(1);
+                @extend %tileTransition;
+
+                .media-video {
+                    @extend %fadeHidden;
+
+                    &.playing {
+                        @extend %fadeVisible;
+                        @extend %tileTransition;
+                        // transition-duration: 0.5s;
+                    }
+                }
+
+                .tile-overlay {
+                    @extend %fadeVisible;
+                    @extend %tileTransition;
+                }
+
+                .button-wr {
+                    @extend %fadeVisible;
+                    @extend %tileTransition;
+                }
+            }
+        }
+    }
+
+    &.detailed-item {
+
+        .selected-border {
+            @extend %overlay;
+            border: 2px solid $white;
+            display: flex;
+            justify-content: center;
+
+            .arrow-down {
+                border-left: 0.912vw solid transparent;
+                border-right: 0.912vw solid transparent;
+                border-top: 0.78125vw solid $white;
+                position: absolute;
+                bottom: -0.78125vw;
+            }
+        }
+
+        .static {
+            .details-button {
+                display: none;
+            }
+        }
+    }
+
+    &.detailed-mode {
+        .static {
+            .tile-progress {
+                @extend %fadeHidden;
+                bottom: 0;
+            }
+
+            .chevrone-overlay {
+                z-index: 5;
+
+                &:hover {
+                    .details-button {
+                        @extend %fadeVisible;
+                        @extend %tileTransition;
+                    }
+                }
+            }
+        }
+    }
+}

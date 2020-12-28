@@ -1,0 +1,132 @@
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.carousel-mobile {
+    .single-row {
+        padding-left: 4vw;
+        // padding-right: 3vw;
+        overflow: visible;
+
+        .slider {
+            clear: both;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding-right: 4vw;
+
+            .app-carousel-affilify-item {
+                display: inline-block;
+                padding: 0 2px;
+               
+            }
+
+            .gutter {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+// tiles
+
+.tile {
+    display: block;
+    position: relative;
+    padding: 28.125% 0;
+    overflow: hidden;
+    // background-color: var(--aff-accent-dark);
+
+    &.originals {
+        padding: 100% 0;
+    }
+
+    &.top {
+        padding: 35.714285714% 0;
+
+        .number-cover {
+            right: 50%;
+    
+            img {
+                position: absolute;
+                left: 30%;
+                object-fit: cover;
+                object-position: left;
+                height: 100%;
+                
+                &.no-left-offset {
+                    left: 0
+                }
+            }
+            
+        }
+
+        .cover {
+            left: 50%;
+        }
+    }
+
+    .originals-logo {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 10%;
+    }
+
+    
+}
+
+@media (max-width: 499px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 50%;
+        }
+    }
+        
+}
+
+@media (min-width: 500px) and (max-width: 799px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 33.3%;
+        }
+    }
+        
+}
+
+@media (min-width: 800px) and (max-width: 1099px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 25%;
+        }
+    }
+        
+}
+
+@media (min-width: 1100px) and (max-width: 1399px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 20%;
+        }
+    }
+        
+}
+
+@media (min-width: 1400px) {
+
+    .slider {
+        .app-carousel-affilify-item {
+            width: 16.6666667%;
+        }
+    }
+        
+}

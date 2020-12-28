@@ -1,0 +1,101 @@
+<div 
+  class="published-tile" 
+  [class.active-item]="isActive"
+  [class.detailed-item]="isDetailed"
+  [class.detailed-mode]="isDetailedMode"
+>
+
+  <div class="tile-content">
+    <!-- published part (hovered and not) -->
+    <div class="static">
+        <!-- poster -->
+      <div class="overlay">
+        <app-cover-simple [guid]="course?.cover" class="hero-poster" [altText]="course.title"></app-cover-simple>
+      </div>
+
+      <div class="tile-progress" *ngIf="showProgress">
+        <mat-progress-bar
+          class="tile-progress-mat"
+          mode="determinate"
+          [value]="course.progress">
+        </mat-progress-bar>
+      </div>
+      
+      <div class="overlay chevrone-overlay" > 
+        <div class="details-button" [class.tile-active]="isActive" (click)="onShowDetailsClick()">
+          <img src="assets/icons/chevron-down.svg"  alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="selected-border">
+      <span class="arrow-down"></span>
+    </div>
+
+    <!-- [@tileContentAppearAnimation]="getAnimationState" -->
+    <div class="active" [class.animation-tile]="this._isActive && this._isScaled">
+      
+      <div class="overlay">
+        <!-- poster -->
+        <app-cover-simple *ngIf="course.cover" [guid]="course.cover" class="cover" [altText]="course.title"></app-cover-simple>
+        <!-- video -->
+        <app-video-simple 
+          *ngIf="course?.videoId && isActive"
+          [@fadeOut]
+          [videoId]="course.videoId"
+          [currentTime]="course.currentTime || 0"
+          [isMuted]="isMuted"
+          [isAutoplay]="false"
+          [class.playing]="_isVideoPlaying"
+          class="media-video simple-overlay"
+          (videoReadyToPlay)="onVideoReadyToPlay($event)"
+          (videoPlay)="onVideoPlay($event)"
+        ></app-video-simple>
+
+        <div class="tile-overlay" >
+          <div 
+            class="animation-wr" 
+            [class.bg-fade]="course?.videoId" 
+            [class.bg-black]="!course?.videoId" 
+            [class.hide-overlay]="controlsAnimationState === 'off'"
+          >
+            
+            <div class="tile-actions">
+
+              <div [hidden]="!isVideoCanPlay" class="action action-mute" (click)="toggleMute()">
+                <span class="material-icons icon">{{isMuted ? 'volume_off' : 'volume_up'}}</span>
+              </div>
+  
+              <div [hidden]="!isVideoCanPlay" class="action action-mute" (click)="replayVideo()">
+                <span class="material-icons icon icon-replay">replay</span>
+              </div>
+  
+            </div>
+  
+            <span *ngIf="course?.tag" class="tag {{getColorClassByName(course?.tag)}}">{{course?.tag}}</span>
+            <div class="course-title">{{course?.title}} </div>
+            <div class="course-description">{{course?.description}}</div>
+            <div class="course-category" *ngIf="course?.categories">
+              <a href="javascript://" *ngFor="let category of course.categories">{{category}}</a>
+            </div>
+  
+            <div class="details-button" [class.tile-active]="isActive" (click)="onShowDetailsClick()">
+              <img src="assets/icons/chevron-down.svg"  alt="">
+            </div>
+
+          </div>
+          
+        </div>
+
+        <div class="button-wr">
+          <button class="button" [routerLink]="['/expert/course', course.id]">{{ 'DASHBOARD.EXPERT.DASHBOARD.EDIT' | translate }}</button>
+          <button *ngIf="btnMakeFeatured" class="button" type="button"> {{ 'DASHBOARD.EXPERT.DASHBOARD.MAKEFEATURED' | translate }}</button>
+          <button *ngIf="btnPublish" class="button" type="button"> {{ 'DASHBOARD.EXPERT.DASHBOARD.PUBLISH' | translate }}</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
